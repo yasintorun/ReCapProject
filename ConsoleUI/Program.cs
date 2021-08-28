@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
+using System.Collections.Generic;
 
 namespace ConsoleUI
 {
@@ -10,29 +12,21 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            ICarService carService = new CarManager(new InMemoryCarDal());
+            ICarService carService = new CarManager(new EfCarDal());
 
-            Car newCar = new Car { Id = 6, BrandId = 4, DailyPrice = 100000, ModelYear = 2010, Description = "Temiz araba" };
+            Car newCar = new Car { Id = 8, BrandId = 1, DailyPrice = 10, ModelYear = 2010, Description = "Tss" , ColorId=1};
 
-            carService.Add(newCar);
-            carService.Delete(new Car { Id=1});
+            bool isAdded = carService.Add(newCar);
 
-            Car updateCar = new Car { Id = 2, BrandId = 5, DailyPrice = 190000, ModelYear = 2015, Description = "Güncellendi araba" };
-            carService.Update(updateCar);
+            Console.WriteLine(isAdded.ToString());
 
+            /*List<Car> myCars = carService.GetCarsByColorId(1);
 
-
-            foreach (var car in carService.GetAll())
+            foreach (var myCar in myCars)
             {
-                Console.WriteLine(car.Description);
+                Console.WriteLine(myCar.Description);
             }
-
-
-            Console.WriteLine("\n\n");
-
-            Car myCar = carService.GetById(3);
-
-            Console.WriteLine(myCar.Description);
+            */
 
         }
     }
