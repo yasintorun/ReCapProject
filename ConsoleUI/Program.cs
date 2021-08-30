@@ -24,7 +24,7 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            Brand newBrand = new Brand { Id = 10, Name = "Honda" };
+            /*Brand newBrand = new Brand { Id = 10, Name = "Honda" };
             bool isAdded = brandManager.Add(newBrand);
             Console.WriteLine(isAdded + "\n");
 
@@ -43,13 +43,13 @@ namespace ConsoleUI
             foreach (var brand in brandManager.GetAll())
             {
                 Console.WriteLine(brand.Name);
-            }
+            }*/
         }
 
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-
+/*
             //Add
             Color newColor = new Color { Id = 6, Name = "Yeşil" };
             bool isAdded = colorManager.Add(newColor);
@@ -75,14 +75,14 @@ namespace ConsoleUI
             foreach (var color in colorManager.GetAll())
             {
                 Console.WriteLine(color.Name);
-            }
+            }*/
         }
 
         private static void CarTest()
         {
             ICarService carService = new CarManager(new EfCarDal());
 
-            foreach (var car in carService.GetCarDetails())
+            foreach (var car in carService.GetCarDetails().Data)
             {
                 Console.WriteLine(car.CarName + " - " + car.BrandName + " - " + car.ColorName);
             }
