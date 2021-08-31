@@ -12,7 +12,29 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarTest();
+            IUserService userService = new UserManager(new EfUserDal());
+            ICustomerService customerService = new CustomerManager(new EfCustomerDal());
+
+            var userAddResult = userService.Add(new User{
+                Id=1,
+                Email = "yasin@test.com",
+                Firstname="Yasin",
+                Lastname = "Torun",
+                Password = "yt",
+            });
+            Console.WriteLine(userAddResult.Message + "\n");
+            var customerAddResult = customerService.Add(new Customer{
+                UserId=1,
+                CompanyName="Yasin T.",
+            });
+            Console.WriteLine(customerAddResult.Message + "\n");
+            if(customerAddResult.Success)
+            {
+                Customer customer = customerService.GetById(1).Data;
+                Console.WriteLine(customer.CompanyName);
+            }
+
+            //CarTest();
 
             //ColorTest();
 

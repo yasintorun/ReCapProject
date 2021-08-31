@@ -40,5 +40,35 @@ namespace Business.Constants
         internal static string ColorListed = "Renk listelendi";
         internal static string ColorUpdated = "Renk güncellendi";
         internal static string ColorGot = "Renk getirildi";
+
+
+        //User messages
+        internal static string UserAdded = "Kullanıcı eklendi.";
+        internal static string UserDeleted = "Kullanıcı silindi.";
+        internal static string UserListed = "Kullanıcılar listelendi.";
+        internal static string UserGot = "Kullanıcı getirildi.";
+        internal static string UserUpdated = "Kullanıcı güncellendi.";
+        
+
+        //Customer messages
+        internal static string CustomerAdded = "Müşteri eklendi";
+        internal static string CustomerDeleted = "Müşteri silindi.";
+        internal static string CustomerListed = "Müşteriler listelendi.";
+        internal static string CustomerGot = "Müşteri getirildi.";
+        internal static string CustomerUpdated = "Müşteri güncellendi.";
+
+
+        //Rental messages
+        internal static string RentalAdded = "Araba Kiralandı.";
+        internal static string RentalDeleted = "Araba teslim edildi.";
+        internal static string RentalListed = "Araba kiraları listelendi.";
+        internal static string RentalGot = "Araba kiralama bilgileri getirildi.";
+        internal static string RentalUpdated = "Araba kiralama bilgileri güncellendi.";
+        internal static string RentalGetCarId = "Araba kira bilgisi getirildi";
+
+
+        internal static string NoCarRentalInfo = "Araba kira bilgisi bulunmuyor.";
+        internal static string CarRented = "Araba zaten kiralanmış.";
+
     }
 }
