@@ -20,7 +20,10 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (rental.ReturnDate != null)
+            rental.RentDate = DateTime.Now;
+
+            Rental isCarRented = this.GetByCarId(rental.CarId).Data;
+            if(isCarRented != null && isCarRented.ReturnDate != null)
             {
                 return new ErrorResult(Messages.CarRented);
             }
