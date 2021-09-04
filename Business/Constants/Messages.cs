@@ -70,5 +70,13 @@ namespace Business.Constants
         internal static string NoCarRentalInfo = "Araba kira bilgisi bulunmuyor.";
         internal static string CarRented = "Araba zaten kiralanmış.";
 
+        //Car Image messages
+        internal static string CarImageUpdated = "Araba fotoğrafları güncellendi.";
+        internal static string CarImageListed = "Araba fotoğrafları listelendi.";
+        internal static string CarImageGot = "Araba fotoğrafı getirildi";
+        internal static string CarImageDeleted = "Araba fotoğrafı silindi";
+        internal static string CarImageAdded = "Araba fotoğrafı eklendi";
+        internal static string ImageLimitExceded = "En fazla 5 adet Fotoğraf koyabilirsiniz.";
+        internal static string CarImagesGetByCar = "Araba fotografları listelendi";
     }
 }

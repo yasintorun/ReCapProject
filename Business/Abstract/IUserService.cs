@@ -6,12 +6,8 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IUserService
+    public interface IUserService : ICrudService<User>
     {
-        IDataResult<List<User>> GetAll();
-        IResult Add(User car);
-        IResult Update(User car);
-        IResult Delete(User car);
-        IDataResult<User> GetById(int id);
+
     }
 }
