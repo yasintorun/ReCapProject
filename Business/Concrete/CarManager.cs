@@ -1,5 +1,9 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -19,6 +23,10 @@ namespace Business.Concrete
             this._carDal = carDal;
         }
 
+        [SecuredOperation("car.add, admin")]
+        [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
+        [CacheAspect]
         public IResult Add(Car car)
         {
             if(car.Description.Length <= 2)
