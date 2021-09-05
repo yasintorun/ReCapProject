@@ -7,6 +7,7 @@ using Core.Utilities.Results;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Core.Entities.Concrete;
 
 namespace WebAPI.Controllers
 {
@@ -33,11 +34,11 @@ namespace WebAPI.Controllers
             return ResponseResult(_userService.GetById(id));
         }
 
-        [HttpPost("add")]
+        /*[HttpPost("add")]
         public IActionResult Add(User user)
         {
             return ResponseResult(_userService.Add(user));
-        }
+        }*/
 
         [HttpPost("update")]
         public IActionResult Update(User user)

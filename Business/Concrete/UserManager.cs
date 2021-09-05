@@ -8,6 +8,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Entities.Concrete;
 
 namespace Business.Concrete
 {
@@ -20,12 +21,12 @@ namespace Business.Concrete
             _userDal = userDal;
         }
 
-        [ValidationAspect(typeof(UserValidator))]
+        /*[ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
             _userDal.Add(user);
             return new SuccessResult(Messages.UserAdded);
-        }
+        }*/
 
         public IResult Delete(User user)
         {
@@ -47,6 +48,26 @@ namespace Business.Concrete
         {
             _userDal.Update(user);
             return new SuccessResult(Messages.UserUpdated);
+        }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public void Add(User user)
+        {
+            _userDal.Add(user);
+        }
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
+        IResult ICrudService<User>.Add(User entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

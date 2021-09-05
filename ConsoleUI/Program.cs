@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
+using Core.Entities.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
@@ -12,15 +13,20 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
+            //UserTest();
+
+        }
+
+        private static void UserTest()
+        {
             IUserService userService = new UserManager(new EfUserDal());
             ICustomerService customerService = new CustomerManager(new EfCustomerDal());
 
-            var userAddResult = userService.Add(new User{
+            /*var userAddResult = userService.Add(new User{
                 Id=1,
                 Email = "yasin@test.com",
-                Firstname="Yasin",
-                Lastname = "Torun",
-                Password = "yt",
+                FirstName="Yasin",
+                LastName = "Torun"
             });
             Console.WriteLine(userAddResult.Message + "\n");
             var customerAddResult = customerService.Add(new Customer{
@@ -38,8 +44,7 @@ namespace ConsoleUI
 
             //ColorTest();
 
-            //BrandTest();
-
+            //BrandTest();*/
         }
 
         private static void BrandTest()
