@@ -11,7 +11,7 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Core.Aspects.Autofac.Transaction;
 namespace Business.Concrete
 {
     public class CarManager : ICarService
@@ -78,10 +78,23 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.CarListedByColor);
         }
 
+        [TransactionScopeAspect]
+        public IResult TransactionalTest(Car car)
+        {
+            _carDal.Add(car);
+            if(car.DailyPrice < 1000000)
+            {
+                throw new Exception("hata");
+            }
+            _carDal.Add(car);
+            return new SuccessResult();
+
+        }
+
         public IResult Update(Car car)
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
-        }
+        }   
     }
 }

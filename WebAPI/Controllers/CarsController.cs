@@ -69,6 +69,10 @@ namespace WebAPI.Controllers
             return ResponseResult(_carService.Delete(car));
         }
 
-
+        [HttpPost("TransactionalTest")]
+        public IActionResult TransactionalTest(Car car)
+        {
+            return ResponseResult(_carService.TransactionalTest(car));
+        }
     }
 }
