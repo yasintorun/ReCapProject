@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return ResponseResult(_rentalService.GetAll());
         }
 
+        [HttpGet("getalldetails")]
+        public IActionResult GetAllDetails()
+        {
+            return ResponseResult(_rentalService.getRentalsDetails());
+        }
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {

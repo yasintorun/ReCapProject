@@ -109,10 +109,10 @@ namespace ConsoleUI
         {
             ICarService carService = new CarManager(new EfCarDal());
 
-            foreach (var car in carService.GetCarDetails().Data)
-            {
-                Console.WriteLine(car.CarName + " - " + car.BrandName + " - " + car.ColorName);
-            }
+            //foreach (var car in carService.GetCarDetails().Data)
+            //{
+            //    Console.WriteLine(car.CarName + " - " + car.BrandName + " - " + car.ColorName);
+            //}
             /*Car newCar = new Car { Id = 8, BrandId = 1, DailyPrice = 10, ModelYear = 2010, Description = "Tss", ColorId = 1 };
 
             bool isAdded = carService.Add(newCar);
