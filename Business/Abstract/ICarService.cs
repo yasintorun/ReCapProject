@@ -9,10 +9,12 @@ namespace Business.Abstract
 {
     public interface ICarService : ICrudService<Car>
     {
-        IDataResult<List<Car>> GetCarsByColorId(int colorId);
-        IDataResult<List<Car>> GetCarsByBrandId(int brandId);
+        IDataResult<List<CarDetailDto>> GetCarsByColorId(string color);
+        IDataResult<List<CarDetailDto>> GetCarsByBrandId(string brand);
 
         IDataResult<List<CarDetailDto>> GetCarDetails();
+
+        IDataResult<CarDetailDto> GetCarDetail(int carId);
 
         IResult TransactionalTest(Car car);
     }

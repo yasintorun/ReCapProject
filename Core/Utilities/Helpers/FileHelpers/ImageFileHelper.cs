@@ -4,13 +4,15 @@ using Microsoft.Extensions.FileProviders;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
 using System.Text;
-
+using System.Web;
 namespace Core.Utilities.Helpers.FileHelpers
 {
     public static class ImageFileHelper
     {
-        private static string root = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images")).Root;
+        private static string carImageFolderName = "Images/";
+        private static string root = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", carImageFolderName);
         private static string defaultCarImage = "defaultCar.png";
         public static string Upload(IFormFile formFile)
         {
@@ -26,7 +28,7 @@ namespace Core.Utilities.Helpers.FileHelpers
                 {
                     formFile.CopyTo(stream);
                 }
-                return filePath.Replace("\\", "/");
+                return "/" + carImageFolderName + newFileName;
                 //return filePath;
             }
             return "";
@@ -48,7 +50,7 @@ namespace Core.Utilities.Helpers.FileHelpers
 
         public static string GetDefaultCarImagePath()
         {
-            return root + defaultCarImage;
+            return "/" + carImageFolderName + defaultCarImage;
         }
     }
 }

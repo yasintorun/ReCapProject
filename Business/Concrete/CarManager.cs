@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Aspects.Autofac.Transaction;
+using System.Linq;
+
 namespace Business.Concrete
 {
     public class CarManager : ICarService
@@ -63,19 +65,24 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id), Messages.CarGot);
         }
 
+        public IDataResult<CarDetailDto> GetCarDetail(int carId)
+        {
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetails(c => c.CarId == carId).FirstOrDefault(), "Araba detayı getirildi");
+        }
+
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>> (_carDal.GetCarDetails(), Messages.CarListedInDetail);
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(string brand)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == brandId), Messages.CarListedByBrand);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandName == brand), Messages.CarListedByBrand);
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(string color)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), Messages.CarListedByColor);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorName == color), Messages.CarListedByColor);
         }
 
         [TransactionScopeAspect]
