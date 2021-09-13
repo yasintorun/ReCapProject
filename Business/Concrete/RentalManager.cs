@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -21,13 +22,24 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            Rental isCarRented = this.GetByCarId(rental.CarId).Data;
-            if(isCarRented != null && isCarRented.ReturnDate != null)
+            IResult result = BusinessRules.Run(CheckRentCar(rental.CarId));
+            if (!result.Success)
+            {
+                return result;
+            }
+            rental.RentDate = DateTime.Now;
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.RentalAdded);
+        }
+
+        public IResult CheckRentCar(int carId)
+        {
+            Rental isCarRented = this.GetByCarId(carId).Data;
+            if (isCarRented != null && isCarRented.ReturnDate == null)
             {
                 return new ErrorResult(Messages.CarRented);
             }
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.RentalAdded);
+            return new SuccessResult();
         }
 
         public IResult Delete(Rental rental)

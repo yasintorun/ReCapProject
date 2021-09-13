@@ -89,5 +89,15 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Giriş başarılı";
         public static string UserAlreadyExists = "Kullanıcı zaten kayıtlı";
         public static string AccessTokenCreated = "Token oluşturuldu";
+
+
+        public static string CreditCardAdded = "Kredi kartı kaydedildi";
+        public static string CreditCardDeleted = "Kredi kartı silindi";
+        public static string CreditCardListed = "Kredi kartları listelendi";
+        public static string CreditCardGot = "Kredi kartı getirildi";
+        public static string CreditCardUpdated = "Kredi kartı güncellendi";
+
+        public static string PaySuccess = "Ödeme başarılı";
+        public static string PaymentListed = "Tüm ödeme bilgileri listelendi";
     }
 }

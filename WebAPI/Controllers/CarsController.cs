@@ -32,6 +32,12 @@ namespace WebAPI.Controllers
             return ResponseResult(_carService.GetCarDetails());
         }
 
+        [HttpGet("getcarbyfilter")]
+        public IActionResult GetCarByFilter(string brand, string color)
+        {
+            return ResponseResult(_carService.GetCarByFilter(brand, color));
+        }
+
         [HttpGet("getcardetail")]
         public IActionResult GetCarDetail(int carId)
         {
@@ -55,6 +61,8 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_carService.GetCarsByBrandId(brand));
         }
+
+
 
         [HttpPost("add")]
         public IActionResult Add(Car car)

@@ -38,6 +38,12 @@ namespace WebAPI.Controllers
             return ResponseResult(_rentalService.GetById(id));
         }
 
+        [HttpGet("checkrentcar")]
+        public IActionResult CheckRentCar(int carId)
+        {
+            return ResponseResult(_rentalService.CheckRentCar(carId));
+        }
+
         [HttpPost("add")]
         public IActionResult Add(Rental rental)
         {
