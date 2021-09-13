@@ -45,7 +45,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete(Brand brand)
         {
             return ResponseResult(_brandService.Delete(brand));

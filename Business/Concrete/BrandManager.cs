@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,6 +20,7 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
@@ -26,6 +29,10 @@ namespace Business.Concrete
 
         public IResult Delete(Brand brand)
         {
+            if(brand == null || brand.Id<1 || String.IsNullOrEmpty(brand.Name))
+            {
+                return new ErrorResult("Marka bilgisi hatalı");
+            }
             _brandDal.Delete(brand);
             return new SuccessResult(Messages.BrandDeleted);
         }
