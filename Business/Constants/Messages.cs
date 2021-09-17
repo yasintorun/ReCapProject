@@ -80,7 +80,8 @@ namespace Business.Constants
         public static string CarImageAdded = "Araba fotoğrafı eklendi";
         public static string ImageLimitExceded = "En fazla 5 adet Fotoğraf koyabilirsiniz.";
         public static string CarImagesGetByCar = "Araba fotografları listelendi";
-        
+        public static string GetFirstImageByCarId = "Arabanın kapak fotoğrafı getirildi";
+
         //auth
         public static string AuthorizationDenied = "Erişim engellendi";
         public static string UserRegistered = "Kayıt başarılı";

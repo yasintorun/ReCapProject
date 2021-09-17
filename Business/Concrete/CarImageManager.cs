@@ -14,7 +14,7 @@ namespace Business.Concrete
 {
     public class CarImageManager : ICarImageService
     {
-        ICarImageDal _carImageDal;
+        private ICarImageDal _carImageDal;
 
         public CarImageManager(ICarImageDal carImageDal)
         {
@@ -44,9 +44,10 @@ namespace Business.Concrete
             return this.Add(carImage);
         }
 
+
         public IResult Delete(CarImage carImage)
         {
-            var result = ImageFileHelper.Delete(carImage.ImagePath);
+            ImageFileHelper.Delete(carImage.ImagePath);
             //return result;
             _carImageDal.Delete(carImage);
             return new SuccessResult(Messages.CarImageDeleted);
@@ -78,7 +79,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        public IDataResult<List<CarImage>> getCarImagesByCarId(int carId)
+        public IDataResult<List<CarImage>> GetCarImagesByCarId(int carId)
         {
             List<CarImage> carImages = _carImageDal.GetAll(c => c.CarId == carId);
             if(carImages.Count == 0)
@@ -91,6 +92,22 @@ namespace Business.Concrete
                 });
             }
             return new SuccessDataResult<List<CarImage>>(carImages, Messages.CarImagesGetByCar);
+        }
+
+        public IDataResult<CarImage> GetFirstOrDefaultByCarId(int carId)
+        {
+            CarImage carImage = _carImageDal.Get(c => c.CarId == carId);
+            
+            if(carImage == null)
+            {
+                carImage = new CarImage
+                {
+                    Id = 0,
+                    CarId = carId,
+                    ImagePath = ImageFileHelper.GetDefaultCarImagePath(),
+                };
+            }
+            return new SuccessDataResult<CarImage>(carImage, Messages.GetFirstImageByCarId);
         }
     }
 }

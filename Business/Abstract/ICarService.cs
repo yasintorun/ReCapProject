@@ -19,5 +19,7 @@ namespace Business.Abstract
         IDataResult<CarDetailDto> GetCarDetail(int carId);
 
         IResult TransactionalTest(Car car);
+
+        IDataResult<int> GetCarTotalPrice(int carId, DateTime rentDate, DateTime returnDate);
     }
 }

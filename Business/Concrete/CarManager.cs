@@ -92,6 +92,19 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorName == color), Messages.CarListedByColor);
         }
 
+        public IDataResult<int> GetCarTotalPrice(int carId, DateTime rentDate, DateTime returnDate)
+        {
+            IDataResult<Car> currentCarResult = this.GetById(carId);
+            if(currentCarResult.Success == false || currentCarResult.Data == null)
+            {
+                return new ErrorDataResult<int>("Araba bulunamadı.");
+            }
+
+            int totalDays = (int)(returnDate - rentDate).TotalDays;
+            int totalPrice = totalDays * currentCarResult.Data.DailyPrice;
+            return new SuccessDataResult<int>(totalPrice);
+        }
+
         [TransactionScopeAspect]
         public IResult TransactionalTest(Car car)
         {

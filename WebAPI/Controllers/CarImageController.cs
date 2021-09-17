@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Business.Abstract;
-using Core.Utilities.Helpers.FileHelpers;
+﻿using Business.Abstract;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,15 +27,21 @@ namespace WebAPI.Controllers
             return ResponseResult(_carImageService.GetById(id));
         }
 
+        [HttpGet("getfirstimagebycarid")]
+        public IActionResult GetFirstOrDefaultByCarId(int carId)
+        {
+            return ResponseResult(_carImageService.GetFirstOrDefaultByCarId(carId));
+        }
+
         [HttpGet("getCarImagesByCarId")]
         public IActionResult GetCarImagesByCarId(int carId)
         {
-            return ResponseResult(_carImageService.getCarImagesByCarId(carId));
+            return ResponseResult(_carImageService.GetCarImagesByCarId(carId));
         }
 
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm] IFormFile imageFile, [FromForm]CarImage carImage)
+        public IActionResult Add([FromForm] IFormFile imageFile, [FromForm] CarImage carImage)
         {
             return ResponseResult(_carImageService.UploadCarImage(imageFile, carImage));
         }

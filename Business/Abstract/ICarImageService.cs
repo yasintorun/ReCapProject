@@ -12,6 +12,7 @@ namespace Business.Abstract
     {
         IResult UploadCarImage(IFormFile imageFile, CarImage carId);
 
-        IDataResult<List<CarImage>> getCarImagesByCarId(int carId);
+        IDataResult<List<CarImage>> GetCarImagesByCarId(int carId);
+        IDataResult<CarImage> GetFirstOrDefaultByCarId(int carId);
     }
 }

@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return ResponseResult(_carService.GetAll());
         }
 
+        [HttpGet("getcartotalprice")]
+        public IActionResult GetCarTotalPrice(int carId, DateTime rentDate, DateTime returnDate)
+        {
+            return ResponseResult(_carService.GetCarTotalPrice(carId, rentDate, returnDate));
+        }
+
         [HttpGet("getcardetails")]
         public IActionResult GetCarDetails()
         {
