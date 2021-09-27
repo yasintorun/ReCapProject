@@ -32,10 +32,10 @@ namespace WebAPI.Controllers
             return ResponseResult(_paymentService.GetById(id));
         }
 
-        [HttpPost("pay")]
-        public IActionResult Pay(PaymentInfoDto paymentInfo)
-        {
-            return ResponseResult(_paymentService.Pay(paymentInfo));
-        }
+        //[HttpPost("pay")]
+        //public IActionResult Pay(PaymentInfoDto paymentInfo)
+        //{
+        //    return ResponseResult(_paymentService.Pay(paymentInfo));
+        //}
     }
 }

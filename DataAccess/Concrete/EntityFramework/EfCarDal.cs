@@ -20,8 +20,22 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from c in context.Cars
                              join b in context.Brands on c.BrandId equals b.Id
                              join clr in context.Colors on c.ColorId equals clr.Id
-                             select new CarDetailDto {Name = c.Name, Description = c.Description, BrandName = b.Name, ColorName = clr.Name, CarId = c.Id, DailyPrice = c.DailyPrice };
+                             select new CarDetailDto {Name = c.Name, Description = c.Description, BrandName = b.Name, ColorName = clr.Name, CarId = c.Id, DailyPrice = c.DailyPrice, FindexPuan=c.FindexPuan };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarDetailsByFilter(CarFilterDto carFilterDto)
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                var result = from c in context.Cars
+                             join b in context.Brands on c.BrandId equals b.Id
+                             join clr in context.Colors on c.ColorId equals clr.Id
+                             where (carFilterDto.Brands ==null || carFilterDto.Brands.Contains(b.Id))
+                               && (carFilterDto.Colors == null || carFilterDto.Colors.Contains(clr.Id))
+                             select new CarDetailDto { Name = c.Name, Description = c.Description, BrandName = b.Name, ColorName = clr.Name, CarId = c.Id, DailyPrice = c.DailyPrice, FindexPuan=c.FindexPuan };
+                return result.ToList();
             }
         }
     }

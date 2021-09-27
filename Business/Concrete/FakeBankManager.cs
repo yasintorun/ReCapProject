@@ -27,7 +27,7 @@ namespace Business.Concrete
                     CVV = "094",
                     ExpirationDate = "04/22"
                 },
-                MoneyAmount = 5000 //Kullanıcının hesabındaki para miktarı
+                MoneyAmount = 1500000 //Kullanıcının hesabındaki para miktarı
             };
         }
 

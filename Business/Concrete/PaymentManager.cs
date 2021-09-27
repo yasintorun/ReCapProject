@@ -45,9 +45,8 @@ namespace Business.Concrete
             {
                 return new ErrorResult("Araba bilgisi hatalı");
             }
-            int payAmount = carResult.Data.DailyPrice;
 
-            IResult result = _bankService.Pay(paymentInfo.CreditCard, payAmount);
+            IResult result = _bankService.Pay(paymentInfo.CreditCard, paymentInfo.Amount);
             if(!result.Success)
             {
                 return result;
@@ -57,7 +56,7 @@ namespace Business.Concrete
             {
                 UserId = paymentInfo.UserId,
                 CarId = paymentInfo.CarId,
-                Amount = payAmount,
+                Amount = paymentInfo.Amount,
                 CreditCardNumber = paymentInfo.CreditCard.CardNumber,
                 Date = DateTime.Now
             });

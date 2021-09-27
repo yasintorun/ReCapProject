@@ -65,11 +65,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.Id == id), Messages.CarGot);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarByFilter(string brand, string color)
-        {
-            brand += ""; //null check control
-            color += "";
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandName.Contains(brand) && c.ColorName.Contains(color)), "Filtrelenmiş arabalar getirildi");
+        public IDataResult<List<CarDetailDto>> GetCarByFilter(CarFilterDto carFilterDto)
+        {   
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetailsByFilter(carFilterDto), "Filtrelenmiş arabalar getirildi");
         }
 
         public IDataResult<CarDetailDto> GetCarDetail(int carId)
@@ -80,6 +78,16 @@ namespace Business.Concrete
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>> (_carDal.GetCarDetails(), Messages.CarListedInDetail);
+        }
+
+        public IDataResult<int> GetCarFindexScore(int carId)
+        {
+            IDataResult<CarDetailDto> carResult = this.GetCarDetail(carId);
+            if(!carResult.Success || carResult.Data == null)
+            {
+                return new ErrorDataResult<int>(-1, carResult.Message);
+            }
+            return new SuccessDataResult<int>(carResult.Data.FindexPuan, Messages.GetCarFindexScore);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarsByBrandId(string brand)
@@ -122,6 +130,6 @@ namespace Business.Concrete
         {
             _carDal.Update(car);
             return new SuccessResult(Messages.CarUpdated);
-        }   
+        }
     }
 }

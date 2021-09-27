@@ -14,12 +14,13 @@ namespace Business.Abstract
 
         IDataResult<List<CarDetailDto>> GetCarDetails();
 
-        IDataResult<List<CarDetailDto>> GetCarByFilter(string brand, string color);
-
         IDataResult<CarDetailDto> GetCarDetail(int carId);
 
         IResult TransactionalTest(Car car);
 
         IDataResult<int> GetCarTotalPrice(int carId, DateTime rentDate, DateTime returnDate);
+        IDataResult<List<CarDetailDto>> GetCarByFilter(CarFilterDto carFilterDto);
+
+        IDataResult<int> GetCarFindexScore(int carId);
     }
 }

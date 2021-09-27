@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,11 +38,15 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_carService.GetCarDetails());
         }
-
         [HttpGet("getcarbyfilter")]
-        public IActionResult GetCarByFilter(string brand, string color)
+        public IActionResult GetCarByFilter(string brands, string colors)
         {
-            return ResponseResult(_carService.GetCarByFilter(brand, color));
+            CarFilterDto filter = new CarFilterDto 
+            { 
+                Brands = brands?.Split(',')?.Select(p => int.Parse(p))?.ToList(),
+                Colors = colors?.Split(',')?.Select(p => int.Parse(p))?.ToList()
+            };
+            return ResponseResult(_carService.GetCarByFilter(filter));
         }
 
         [HttpGet("getcardetail")]

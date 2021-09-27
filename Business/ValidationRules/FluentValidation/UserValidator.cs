@@ -11,9 +11,10 @@ namespace Business.ValidationRules.FluentValidation
         public UserValidator()
         {
             RuleFor(u => u.Email).NotNull();
-           /* RuleFor(u => u.Password).NotNull().MinimumLength(6);
-            RuleFor(u => u.Firstname).NotNull().MinimumLength(3);
-            RuleFor(u => u.Lastname).NotNull().MinimumLength(2);*/
+            RuleFor(u => u.FirstName).NotNull().NotEmpty();
+            RuleFor(u => u.FirstName).MinimumLength(3);
+            RuleFor(u => u.LastName).NotNull().NotEmpty();
+            RuleFor(u => u.LastName).MinimumLength(2);
         }
     }
 }

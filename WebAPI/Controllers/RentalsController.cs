@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,13 @@ namespace WebAPI.Controllers
         public IActionResult Add(Rental rental)
         {
             return ResponseResult(_rentalService.Add(rental));
+        }
+
+
+        [HttpPost("rentcar")]
+        public IActionResult RentCar(PaymentInfoDto payment)
+        {
+            return ResponseResult(_rentalService.RentCar(payment));
         }
 
         [HttpPost("update")]

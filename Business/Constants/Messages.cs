@@ -100,5 +100,7 @@ namespace Business.Constants
 
         public static string PaySuccess = "Ödeme başarılı";
         public static string PaymentListed = "Tüm ödeme bilgileri listelendi";
+        public static string UserFindexScoreInsufficient = "Findeks Puanınız Yetersiz. Bu aracı kiralayamazsınız.";
+        public static string GetCarFindexScore = "Arabanın Findeks puanı getirildi";
     }
 }

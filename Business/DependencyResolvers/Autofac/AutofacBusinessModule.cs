@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
+using Business.Adapters.Abstract;
+using Business.Adapters.Concrete;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
@@ -42,6 +44,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
 
             builder.RegisterType<FakeBankManager>().As<IBankService>().SingleInstance();
+            builder.RegisterType<FakeFindexScoreAdapter>().As<IFindexScoreService>().SingleInstance();
+
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();

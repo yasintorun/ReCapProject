@@ -41,7 +41,13 @@ namespace Business.Concrete
 
         public IDataResult<User> GetById(int id)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Id == id), Messages.UserGot);
+            User user = _userDal.Get(u => u.Id == id);
+            if(user != null)
+            {
+                user.PasswordHash = null;
+                user.PasswordSalt = null;
+            }
+            return new SuccessDataResult<User>(user, Messages.UserGot);
         }
 
         public IResult Update(User user)
@@ -55,6 +61,7 @@ namespace Business.Concrete
             return _userDal.GetClaims(user);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public void Add(User user)
         {
             _userDal.Add(user);

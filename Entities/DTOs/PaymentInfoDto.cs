@@ -9,6 +9,9 @@ namespace Entities.DTOs
     {
         public int UserId { get; set; }
         public int CarId { get; set; }
+        public int Amount { get; set; }
         public CreditCardDto CreditCard { get; set; }
+        public DateTime? RentDate { get; set; }
+        public DateTime? ReturnDate { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using Core.Utilities.Results;
 using Core.Utilities.Security.Hashing;
 using Core.Utilities.Security.JWT;
 using Entities.DTOs;
-
+using Core.Aspects.Autofac.Transaction;
 namespace Business.Concrete
 {
     public class AuthManager : IAuthService
@@ -19,6 +19,7 @@ namespace Business.Concrete
             _tokenHelper = tokenHelper;
         }
 
+        [TransactionScopeAspect]
         public IDataResult<User> Register(UserForRegisterDto userForRegisterDto, string password)
         {
             byte[] passwordHash, passwordSalt;
@@ -65,7 +66,7 @@ namespace Business.Concrete
         {
             var claims = _userService.GetClaims(user);
             var accessToken = _tokenHelper.CreateToken(user, claims);
-            return new SuccessDataResult<AccessToken>(accessToken, Messages.AccessTokenCreated);
+            return new SuccessDataResult<AccessToken>(accessToken, Messages.UserRegistered);
         }
     }
 }
