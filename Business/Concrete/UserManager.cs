@@ -50,8 +50,18 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(user, Messages.UserGot);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
+            User current = _userDal.Get(u => u.Id == user.Id);
+            if(current == null)
+            {
+                return new ErrorResult(Messages.UserNotFound);
+            }
+
+            user.PasswordHash = current.PasswordHash;
+            user.PasswordSalt = current.PasswordSalt;
+
             _userDal.Update(user);
             return new SuccessResult(Messages.UserUpdated);
         }
