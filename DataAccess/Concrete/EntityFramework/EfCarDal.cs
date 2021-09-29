@@ -33,7 +33,9 @@ namespace DataAccess.Concrete.EntityFramework
                              join b in context.Brands on c.BrandId equals b.Id
                              join clr in context.Colors on c.ColorId equals clr.Id
                              where (carFilterDto.Brands ==null || carFilterDto.Brands.Contains(b.Id))
-                               && (carFilterDto.Colors == null || carFilterDto.Colors.Contains(clr.Id))
+                                && (carFilterDto.Colors == null || carFilterDto.Colors.Contains(clr.Id))
+                                && (c.DailyPrice >= carFilterDto.MinPrice)
+                                && (carFilterDto.MaxPrice == 0 || c.DailyPrice <= carFilterDto.MaxPrice)
                              select new CarDetailDto { Name = c.Name, Description = c.Description, BrandName = b.Name, ColorName = clr.Name, CarId = c.Id, DailyPrice = c.DailyPrice, FindexPuan=c.FindexPuan };
                 return result.ToList();
             }

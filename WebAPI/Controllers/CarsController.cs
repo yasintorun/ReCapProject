@@ -39,12 +39,14 @@ namespace WebAPI.Controllers
             return ResponseResult(_carService.GetCarDetails());
         }
         [HttpGet("getcarbyfilter")]
-        public IActionResult GetCarByFilter(string brands, string colors)
+        public IActionResult GetCarByFilter(string brands, string colors, int minPrice, int maxPrice)
         {
             CarFilterDto filter = new CarFilterDto 
             { 
-                Brands = brands?.Split(',')?.Select(p => int.Parse(p))?.ToList(),
-                Colors = colors?.Split(',')?.Select(p => int.Parse(p))?.ToList()
+                Brands = brands?.Split(',')?.Select(p => Convert.ToInt32(p))?.ToList(),
+                Colors = colors?.Split(',')?.Select(p => Convert.ToInt32(p))?.ToList(),
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
             };
             return ResponseResult(_carService.GetCarByFilter(filter));
         }

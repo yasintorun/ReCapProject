@@ -9,5 +9,7 @@ namespace Entities.DTOs
     {
         public List<int> Brands { get; set; }
         public List<int> Colors { get; set; }
+        public int MinPrice { get; set; }
+        public int MaxPrice { get; set; }
     }
 }
