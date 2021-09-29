@@ -52,11 +52,11 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("rentcar")]
-        public IActionResult RentCar(PaymentInfoDto payment, [FromQuery] bool save = false)
-        {
-            return ResponseResult(_rentalService.RentCar(payment, save));
-        }
+        //[HttpPost("rentcar")]
+        //public IActionResult RentCar(PaymentInfoDto payment, [FromQuery] bool save = false)
+        //{
+        //    return ResponseResult(_rentalService.RentCar(payment, save));
+        //}
 
         [HttpPost("update")]
         public IActionResult Update(Rental rental)

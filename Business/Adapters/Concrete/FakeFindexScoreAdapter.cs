@@ -10,7 +10,7 @@ namespace Business.Adapters.Concrete
         public int GetUserFindexScore(int userId)
         {
             Random random = new Random();
-            return random.Next(1901);
+            return random.Next(1800, 1901);
         }
     }
 }

@@ -13,5 +13,7 @@ namespace Business.Abstract
         IResult Pay(PaymentInfoDto paymentInfo, bool creditCardSave=false);
         IDataResult<List<Payment>> GetAll();
         IDataResult<Payment> GetById(int id);
+
+        IDataResult<List<OrderDetailDto>> GetAllUserOrders(int userId);
     }
 }

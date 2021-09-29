@@ -16,33 +16,29 @@ namespace Business.Concrete
     public class RentalManager : IRentalService
     {
         private IRentalDal _rentalDal;
-        private IPaymentService _paymentService;
         private IFindexScoreService _findexScoreService;
         private ICarService _carService;
-        public RentalManager(IRentalDal rentalDal, IPaymentService paymentService, IFindexScoreService findexScoreService, ICarService carService)
+        public RentalManager(IRentalDal rentalDal, IFindexScoreService findexScoreService, ICarService carService)
         {
             _rentalDal = rentalDal;
-            _paymentService = paymentService;
             _findexScoreService = findexScoreService;
             _carService = carService;
         }
 
         public IResult Add(Rental rental)
         {
-            _rentalDal.Add(rental);
-            return new SuccessResult(Messages.RentalAdded);
+            return this.Add2(rental);
         }
 
-        [TransactionScopeAspect()]
-        public IResult RentCar(PaymentInfoDto paymentDto, bool creditCardSave=false)
+        public IResult Rentalable(Rental rental)
         {
-            Rental rental = new Rental
-            {
-                CarId = paymentDto.CarId,
-                CustomerId = paymentDto.UserId,
-                RentDate = paymentDto.RentDate,
-                ReturnDate = paymentDto.ReturnDate
-            };
+            //Rental rental = new Rental
+            //{
+            //    CarId = paymentDto.CarId,
+            //    CustomerId = paymentDto.UserId,
+            //    RentDate = paymentDto.RentDate,
+            //    ReturnDate = paymentDto.ReturnDate
+            //};
 
             IDataResult<int> carFindexScoreResult = _carService.GetCarFindexScore(rental.CarId);
             IResult result = BusinessRules.Run(carFindexScoreResult, CheckRentCar(rental.CarId), CheckUserFindexScore(carFindexScoreResult.Data, rental.CustomerId));
@@ -51,15 +47,15 @@ namespace Business.Concrete
                 return result;
             }
             
-            IResult payResult = _paymentService.Pay(paymentDto, creditCardSave);
-            if(!payResult.Success)
-            {
-                return payResult;
-            }
+            //IResult payResult = _paymentService.Pay(paymentDto, creditCardSave);
+            //if(!payResult.Success)
+            //{
+            //    return payResult;
+            //}
 
-            this.Add(rental);
+            //this.Add(rental);
 
-            return new SuccessResult("Ödeme başarılı, Araç kiralandı.");
+            return new SuccessResult();
         }
 
         public IResult CheckRentCar(int carId)
@@ -116,6 +112,17 @@ namespace Business.Concrete
         {
             _rentalDal.Update(rental);
             return new SuccessResult(Messages.RentalUpdated);
+        }
+
+        public IDataResult<Rental> Add2(Rental rental)
+        {
+            IResult result = BusinessRules.Run(this.Rentalable(rental));
+            if(result != null)
+            {
+                return new ErrorDataResult<Rental>(null, result.Message);
+            }
+            Rental addedRental = _rentalDal.Add(rental);
+            return new SuccessDataResult<Rental>(addedRental, Messages.RentalAdded);
         }
     }
 }

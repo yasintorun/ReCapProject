@@ -104,5 +104,6 @@ namespace Business.Constants
         public static string GetCarFindexScore = "Arabanın Findeks puanı getirildi";
 
         public static string CreditCardListedByUserId = "Kullanıcının kredi kartları listelendi";
+        public static string GetAllUserOrders = "Kullanıcının tüm siparişleri listelendi";
     }
 }

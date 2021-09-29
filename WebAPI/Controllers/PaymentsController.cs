@@ -26,16 +26,22 @@ namespace WebAPI.Controllers
             return ResponseResult(_paymentService.GetAll());
         }
 
+        [HttpGet("getalluserorders")]
+        public IActionResult GetAllUserOrders(int userId)
+        {
+            return ResponseResult(_paymentService.GetAllUserOrders(userId));
+        }
+
         [HttpGet("getbyid")]
         public IActionResult GetById(int id)
         {
             return ResponseResult(_paymentService.GetById(id));
         }
 
-        //[HttpPost("pay")]
-        //public IActionResult Pay(PaymentInfoDto paymentInfo)
-        //{
-        //    return ResponseResult(_paymentService.Pay(paymentInfo));
-        //}
+        [HttpPost("pay")]
+        public IActionResult Pay(PaymentInfoDto paymentInfo, bool save)
+        {
+            return ResponseResult(_paymentService.Pay(paymentInfo, save));
+        }
     }
 }

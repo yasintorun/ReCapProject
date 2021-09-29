@@ -9,11 +9,12 @@ namespace Business.Abstract
 {
     public interface IRentalService : ICrudService<Rental>
     {
+        IDataResult<Rental> Add2(Rental rental);
         IDataResult<List<RentalDetailDto>> getRentalsDetails();
 
         IDataResult<Rental> GetByCarId(int carId);
 
         IResult CheckRentCar(int carId);
-        IResult RentCar(PaymentInfoDto payment, bool creditCardSave = false);
+        IResult Rentalable(Rental rental);
     }
 }
