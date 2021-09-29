@@ -16,11 +16,13 @@ namespace Business.Concrete
         private IPaymentDal _paymentDal;
         private IBankService _bankService;
         private ICarService _carService;
-        public PaymentManager(IPaymentDal paymentDal, IBankService bankService, ICarService carService)
+        private ICreditCardService _creditCardService;
+        public PaymentManager(IPaymentDal paymentDal, IBankService bankService, ICarService carService, ICreditCardService creditCardService)
         {
             _paymentDal = paymentDal;
             _bankService = bankService;
             _carService = carService;
+            _creditCardService = creditCardService;
         }
 
         public IDataResult<List<Payment>> GetAll()
@@ -34,7 +36,7 @@ namespace Business.Concrete
         }
 
         [TransactionScopeAspect()]
-        public IResult Pay(PaymentInfoDto paymentInfo)
+        public IResult Pay(PaymentInfoDto paymentInfo, bool creditCardSave=false)
         {
             IDataResult<Car> carResult = _carService.GetById(paymentInfo.CarId);
             if(!carResult.Success)
@@ -50,6 +52,14 @@ namespace Business.Concrete
             if(!result.Success)
             {
                 return result;
+            }
+            if(creditCardSave)
+            {
+                try
+                {
+                    paymentInfo.CreditCard.UserId = paymentInfo.UserId;
+                    _creditCardService.Add(paymentInfo.CreditCard);
+                } catch{}
             }
 
             _paymentDal.Add(new Payment

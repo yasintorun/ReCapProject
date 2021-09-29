@@ -53,9 +53,9 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("rentcar")]
-        public IActionResult RentCar(PaymentInfoDto payment)
+        public IActionResult RentCar(PaymentInfoDto payment, [FromQuery] bool save = false)
         {
-            return ResponseResult(_rentalService.RentCar(payment));
+            return ResponseResult(_rentalService.RentCar(payment, save));
         }
 
         [HttpPost("update")]

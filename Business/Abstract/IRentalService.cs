@@ -14,6 +14,6 @@ namespace Business.Abstract
         IDataResult<Rental> GetByCarId(int carId);
 
         IResult CheckRentCar(int carId);
-        IResult RentCar(PaymentInfoDto payment);
+        IResult RentCar(PaymentInfoDto payment, bool creditCardSave = false);
     }
 }

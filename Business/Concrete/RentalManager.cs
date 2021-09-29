@@ -34,7 +34,7 @@ namespace Business.Concrete
         }
 
         [TransactionScopeAspect()]
-        public IResult RentCar(PaymentInfoDto paymentDto)
+        public IResult RentCar(PaymentInfoDto paymentDto, bool creditCardSave=false)
         {
             Rental rental = new Rental
             {
@@ -51,7 +51,7 @@ namespace Business.Concrete
                 return result;
             }
             
-            IResult payResult = _paymentService.Pay(paymentDto);
+            IResult payResult = _paymentService.Pay(paymentDto, creditCardSave);
             if(!payResult.Success)
             {
                 return payResult;

@@ -10,7 +10,7 @@ namespace Business.Abstract
 {
     public interface IPaymentService
     {
-        IResult Pay(PaymentInfoDto paymentInfo);
+        IResult Pay(PaymentInfoDto paymentInfo, bool creditCardSave=false);
         IDataResult<List<Payment>> GetAll();
         IDataResult<Payment> GetById(int id);
     }
