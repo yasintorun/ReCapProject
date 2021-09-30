@@ -8,6 +8,7 @@ using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Core.Entities.Concrete;
+using Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -44,6 +45,12 @@ namespace WebAPI.Controllers
         public IActionResult Update(User user)
         {
             return ResponseResult(_userService.Update(user));
+        }
+
+        [HttpPost("changepassword")]
+        public IActionResult ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            return ResponseResult(_userService.ChangePassword(changePasswordDto));
         }
 
 

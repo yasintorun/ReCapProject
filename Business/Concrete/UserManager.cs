@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Core.Entities.Concrete;
+using Entities.DTOs;
+using Core.Utilities.Security.Hashing;
 
 namespace Business.Concrete
 {
@@ -85,6 +87,37 @@ namespace Business.Concrete
         IResult ICrudService<User>.Add(User entity)
         {
             throw new NotImplementedException();
+        }
+
+        public IResult ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            User user = _userDal.Get(u => u.Id == changePasswordDto.UserId);
+
+            if (user == null)
+            {
+                return new ErrorResult("Böyle bir kullanıcı yok. Şifre sıfırlanamadı.");
+            }
+
+            if(changePasswordDto.NewPassword != changePasswordDto.NewPasswordRepeat)
+            {
+                return new ErrorResult("Şifreler uyuşmuyor");
+            }
+
+            if (!HashingHelper.VerifyPasswordHash(changePasswordDto.CurrentPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                return new ErrorResult(Messages.PasswordError);
+            }
+
+            byte[] passwordHash, passwordSalt;
+            HashingHelper.CreatePasswordHash(changePasswordDto.NewPassword, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _userDal.Update(user);
+
+            return new SuccessResult("Şifre değiştirildi");
+
         }
     }
 }
