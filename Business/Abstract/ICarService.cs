@@ -22,5 +22,6 @@ namespace Business.Abstract
         IDataResult<List<CarDetailDto>> GetCarByFilter(CarFilterDto carFilterDto);
 
         IDataResult<int> GetCarFindexScore(int carId);
+        IDataResult<int> GetTotalCarCount();
     }
 }

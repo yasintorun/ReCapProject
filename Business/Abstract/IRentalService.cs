@@ -16,5 +16,6 @@ namespace Business.Abstract
 
         IResult CheckRentCar(int carId);
         IResult Rentalable(Rental rental);
+        IDataResult<int> GetTotalRentalCount();
     }
 }

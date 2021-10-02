@@ -102,5 +102,10 @@ namespace Business.Concrete
 
             return new SuccessResult(Messages.PaySuccess);
         }
+
+        public IDataResult<int> TotalMoneyEarned()
+        {
+            return new SuccessDataResult<int>(_paymentDal.GetTotalMoneyEarned());
+        }
     }
 }

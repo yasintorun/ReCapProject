@@ -70,5 +70,11 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_rentalService.Delete(rental));
         }
+
+        [HttpGet("totalrentalcount")]
+        public IActionResult GetTotalRentalCount()
+        {
+            return ResponseResult(_rentalService.GetTotalRentalCount());
+        }
     }
 }

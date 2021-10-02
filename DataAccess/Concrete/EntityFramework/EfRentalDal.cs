@@ -10,6 +10,15 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, ReCapContext>, IRentalDal
     {
+        public int GetTotalRentalCount()
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                int count = context.Rentals.Count();
+                return count;
+            }
+        }
+
         public List<RentalDetailDto> rentalDetails()
         {
             using (ReCapContext context = new ReCapContext())

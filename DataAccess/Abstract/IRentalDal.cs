@@ -10,5 +10,6 @@ namespace DataAccess.Abstract
     public interface IRentalDal : IEntityRepository<Rental>
     {
         List<RentalDetailDto> rentalDetails();
+        int GetTotalRentalCount();
     }
 }

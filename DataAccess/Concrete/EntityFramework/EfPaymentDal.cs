@@ -25,5 +25,14 @@ namespace DataAccess.Concrete.EntityFramework
                 return results.ToList();
             }
         }
+
+        public int GetTotalMoneyEarned()
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                int sum = context.Payments.Select(p => p.Amount).Sum();
+                return sum;
+            }
+        }
     }
 }

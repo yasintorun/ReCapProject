@@ -59,5 +59,11 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_userService.Delete(user));
         }
+
+        [HttpGet("gettotalusercount")]
+        public IActionResult GetTotalUserCount()
+        {
+            return ResponseResult(_userService.GetTotalUserCount());
+        }
     }
 }

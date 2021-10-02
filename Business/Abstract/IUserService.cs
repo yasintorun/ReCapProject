@@ -14,5 +14,6 @@ namespace Business.Abstract
         new void Add(User user);
         User GetByMail(string email);
         IResult ChangePassword(ChangePasswordDto changePasswordDto);
+        IDataResult<int> GetTotalUserCount();
     }
 }

@@ -43,5 +43,11 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_paymentService.Pay(paymentInfo, save));
         }
+
+        [HttpGet("totalmoneyearned")]
+        public IActionResult TotalMoneyEarned()
+        {
+            return ResponseResult(_paymentService.TotalMoneyEarned());
+        }
     }
 }

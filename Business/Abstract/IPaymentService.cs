@@ -15,5 +15,6 @@ namespace Business.Abstract
         IDataResult<Payment> GetById(int id);
 
         IDataResult<List<OrderDetailDto>> GetAllUserOrders(int userId);
+        IDataResult<int> TotalMoneyEarned();
     }
 }

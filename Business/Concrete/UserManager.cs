@@ -119,5 +119,10 @@ namespace Business.Concrete
             return new SuccessResult("Şifre değiştirildi");
 
         }
+
+        public IDataResult<int> GetTotalUserCount()
+        {
+            return new SuccessDataResult<int>(_userDal.GetTotalUserCount());
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace DataAccess.Abstract
     public interface IPaymentDal : IEntityRepository<Payment>
     {
         List<OrderDetailDto> GetAllOrderDetails(int userId);
+        int GetTotalMoneyEarned();
     }
 }

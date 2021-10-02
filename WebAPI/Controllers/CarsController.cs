@@ -101,5 +101,12 @@ namespace WebAPI.Controllers
         {
             return ResponseResult(_carService.TransactionalTest(car));
         }
+
+
+        [HttpGet("totalcarcount")]
+        public IActionResult GetTotalCarCount()
+        {
+            return ResponseResult(_carService.GetTotalCarCount());
+        }
     }
 }

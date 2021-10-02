@@ -24,5 +24,14 @@ namespace DataAccess.Concrete.EntityFramework
 
             }
         }
+
+        public int GetTotalUserCount()
+        {
+            using (var context = new ReCapContext())
+            {
+                int count = context.Users.Count();
+                return count;
+            }
+        }
     }
 }

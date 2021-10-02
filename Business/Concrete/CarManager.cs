@@ -113,6 +113,11 @@ namespace Business.Concrete
             return new SuccessDataResult<int>(totalPrice);
         }
 
+        public IDataResult<int> GetTotalCarCount()
+        {
+            return new SuccessDataResult<int>(_carDal.GetTotalCarCount());
+        }
+
         [TransactionScopeAspect]
         public IResult TransactionalTest(Car car)
         {

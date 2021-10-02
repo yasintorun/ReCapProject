@@ -124,5 +124,10 @@ namespace Business.Concrete
             Rental addedRental = _rentalDal.Add(rental);
             return new SuccessDataResult<Rental>(addedRental, Messages.RentalAdded);
         }
+
+        public IDataResult<int> GetTotalRentalCount()
+        {
+            return new SuccessDataResult<int>(_rentalDal.GetTotalRentalCount());
+        }
     }
 }

@@ -40,5 +40,14 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+
+        public int GetTotalCarCount()
+        {
+            using (ReCapContext context = new ReCapContext())
+            {
+                int count = context.Cars.Count();
+                return count;
+            }
+        }
     }
 }
