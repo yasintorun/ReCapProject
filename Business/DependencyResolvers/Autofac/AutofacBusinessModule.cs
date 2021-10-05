@@ -28,6 +28,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<CarManager>().As<ICarService>().SingleInstance();
             builder.RegisterType<EfCarDal>().As<ICarDal>().SingleInstance();
 
+            builder.RegisterType<CarDetailManager>().As<ICarDetailService>().SingleInstance();
+            builder.RegisterType<EfCarDetailDal>().As<ICarDetailDal>().SingleInstance();
+
             builder.RegisterType<BrandManager>().As<IBrandService>().SingleInstance();
             builder.RegisterType<EfBrandDal>().As<IBrandDal>().SingleInstance();
 
@@ -43,6 +46,8 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<PaymentManager>().As<IPaymentService>().SingleInstance();
             builder.RegisterType<EfPaymentDal>().As<IPaymentDal>().SingleInstance();
 
+
+
             builder.RegisterType<FakeBankManager>().As<IBankService>().SingleInstance();
             builder.RegisterType<FakeFindexScoreAdapter>().As<IFindexScoreService>().SingleInstance();
 
@@ -51,6 +56,7 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
+
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
