@@ -49,6 +49,12 @@ namespace Business.Concrete
             }
         }
 
+        public IDataResult<Car> Add2(Car car)
+        {
+            Car addCar = _carDal.Add(car);
+            return new SuccessDataResult<Car>(addCar, Messages.CarAdded);
+        }
+
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);

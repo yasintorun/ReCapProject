@@ -27,7 +27,8 @@ namespace Business.Concrete
 
         public IResult Add(CarDetail entity)
         {
-            throw new NotImplementedException();
+            _carDetailDal.Add(entity);
+            return new SuccessResult("Araba detayı eklendi");
         }
 
         public IResult Delete(CarDetail entity)

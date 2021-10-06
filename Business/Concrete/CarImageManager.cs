@@ -37,7 +37,7 @@ namespace Business.Concrete
             }
 
 
-            string filePath = ImageFileHelper.Upload(imageFile);
+            string filePath = ImageFileHelper.Upload(imageFile, ImagePaths.carImageFolderName);
             carImage.ImagePath = filePath;
             carImage.Date = DateTime.Now;
             // return new SuccessDataResult<CarImage>(carImage);
@@ -88,7 +88,7 @@ namespace Business.Concrete
                 {
                     Id = 0,
                     CarId = carId,
-                    ImagePath = ImageFileHelper.GetDefaultCarImagePath(),
+                    ImagePath = this.GetDefaultCarImagePath(),
                 });
             }
             return new SuccessDataResult<List<CarImage>>(carImages, Messages.CarImagesGetByCar);
@@ -104,10 +104,17 @@ namespace Business.Concrete
                 {
                     Id = 0,
                     CarId = carId,
-                    ImagePath = ImageFileHelper.GetDefaultCarImagePath(),
+                    ImagePath = this.GetDefaultCarImagePath(),
                 };
             }
             return new SuccessDataResult<CarImage>(carImage, Messages.GetFirstImageByCarId);
         }
+
+
+        private string GetDefaultCarImagePath()
+        {
+            return ImageFileHelper.GetDefaultImagePath() + "/" + ImagePaths.defaultCarImageName;
+        }
+
     }
 }

@@ -27,5 +27,11 @@ namespace WebAPI.Controllers
             return ResponseResult(_carDetailService.GetAll());
         }
 
+        [HttpPost("add")]
+        public IActionResult Add(CarDetail carDetail)
+        {
+            return ResponseResult(_carDetailService.Add(carDetail));
+        }
+
     }
 }

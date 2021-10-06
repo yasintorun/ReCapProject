@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Car car)
         {
-            return ResponseResult(_carService.Add(car));
+            return ResponseResult(_carService.Add2(car));
         }
 
         [HttpPost("update")]
