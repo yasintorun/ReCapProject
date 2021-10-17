@@ -14,9 +14,6 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(c => c.DailyPrice).LessThan(1000000);
             RuleFor(c => c.DailyPrice).GreaterThan(0);
             
-            RuleFor(c => c.ModelYear).NotNull().NotEmpty();
-            RuleFor(c => c.ModelYear).LessThanOrEqualTo(DateTime.Today.Year);
-            RuleFor(c => c.ModelYear).GreaterThanOrEqualTo(1990);
 
             RuleFor(c => c.Description).NotNull().NotEmpty();
             RuleFor(c => c.Description).MaximumLength(500);

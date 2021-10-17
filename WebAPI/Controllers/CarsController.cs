@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business.Abstract;
+using Core.Utilities.Results;
 using Entities.Concrete;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
@@ -80,7 +81,8 @@ namespace WebAPI.Controllers
         [HttpPost("add")]
         public IActionResult Add(Car car)
         {
-            return ResponseResult(_carService.Add2(car));
+            return ResponseResult(_carService.AddWithDetail(car));
+
         }
 
         [HttpPost("update")]
@@ -90,7 +92,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpDelete("delete")]
+        [HttpPost("delete")]
         public IActionResult Delete(Car car)
         {
             return ResponseResult(_carService.Delete(car));

@@ -31,14 +31,6 @@ namespace Business.Concrete
         [CacheAspect]
         public IResult Add(Car car)
         {
-            if(car.Description.Length <= 2)
-            {
-                return new ErrorResult(Messages.CarNameAtLeast2Char);
-            }
-            if(car.DailyPrice < 0)
-            {
-                return new ErrorResult(Messages.CarDailyPriceNotZero);
-            }
             try
             {
                 _carDal.Add(car);
@@ -49,7 +41,8 @@ namespace Business.Concrete
             }
         }
 
-        public IDataResult<Car> Add2(Car car)
+        [TransactionScopeAspect]
+        public IDataResult<Car> AddWithDetail(Car car)
         {
             Car addCar = _carDal.Add(car);
             return new SuccessDataResult<Car>(addCar, Messages.CarAdded);
